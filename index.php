@@ -9,10 +9,13 @@ require_once 'class/calendar.php';
         <meta charset="UTF-8">
         <title>ShyCalendar</title>
 
-        <link rel="stylesheet" type="text/css" href="css/index.css" />
         <link rel="shortcut icon" href="img/icon.gif" />
-        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-        <script type="text/javascript" src="http://code.jquery.com/ui/1.10.3/jquery-ui.js"></script>
+        
+        <link rel="stylesheet" type="text/css" href="components/jquery-ui-1.12.1/jquery-ui.min.css" />
+        <link rel="stylesheet" type="text/css" href="css/index.css" />
+        
+        <script type="text/javascript" src="components/jquery-3.2.1.min.js"></script>
+        <script type="text/javascript" src="components/jquery-ui-1.12.1/jquery-ui.min.js"></script>
         <script type="text/javascript" src="js/animateHeight.js"></script>
         <script type="text/javascript" src="js/index.js"></script>
 
