@@ -1,0 +1,215 @@
+*{
+    margin:0;padding:0;
+    font-size:8.5pt;font-family:"Arial";
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
+    box-sizing: border-box;         /* Opera/IE 8+ */
+}
+body{
+    position: relative;
+    /*ackground: url("../img/black-bg.png");*/
+    background:#262626;
+}
+
+/* SITE */
+.siteheader{
+    background:#32739C;
+    height:40px;
+    position: fixed;
+    top:0px; left:0px; right:0px;
+    z-index:2000;
+    border-bottom:4px solid #0C486E; /* darker */
+}
+.siteheader section.menu ul{
+    width:42.5%;
+    min-width:340px;
+    margin:auto;
+}
+.siteheader section.menu ul li{
+    list-style: none;
+    display: inline-block;
+    border-left:4px solid #0C486E;
+    height:36px;
+    
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+.siteheader section.menu ul li div.btn{
+    padding:0px 20px;
+    padding-top: 14px;
+}
+
+.siteheader section.menu ul li:hover{
+    background: #0C486E;
+}
+.siteheader section.menu ul li p{
+    color: #fff;
+    font-weight: bold;
+    font-size: 8pt;
+}
+.siteheader section.menu ul li.last{
+    border-right:4px solid #0C486E;
+}
+
+.siteheader section.days ul{
+	list-style:none;
+}
+section.days ul li{
+	display:inline-block;
+	width:14.285%;
+	padding:5px 0px;
+	text-align:center;
+	background:#0C486E;
+	border-right:2px solid #32739C; /* lighter */
+	border-left:2px solid #32739C;
+	border-bottom:4px solid #32739C;
+	color:#fff;
+}
+
+.siteheader .abs{
+    position: absolute;
+    top:40px; left:0px;
+    cursor: default;
+    overflow: hidden;
+}
+.siteheader .abs span{
+    padding:10px;
+    display: none;
+}
+.siteheader input[type="text"]{
+    margin-bottom:1px;
+    padding:10px;
+    border:none;
+    width:300px;
+}
+.siteheader textarea{
+    margin-bottom:1px;
+    padding:10px;
+    border:none;
+    width:300px; height:75px;
+}
+
+.siteheader .todolist{
+    width: 0px; height: 0px; background: #333;
+    z-index:4000;
+}
+.siteheader .newevent{
+    z-index:4001;
+}
+.siteheader .sqlcommand{
+    z-index:4002;
+}
+
+/* CALENDAR */
+.year{
+    margin-top:100px;
+}
+.week{
+}
+.week.first{
+    text-align:right;
+}
+.day{
+    display: inline-block;
+    vertical-align: top;
+    width:14.282%;
+}
+.day.basic{
+    /*opacity: 0.8;*/
+}
+.day.evented{
+    
+}
+.day.today .header{
+    background: #9E2E2E;
+    color:#fff;
+}
+.day .header{
+    position: relative;
+    padding:10px 0px;
+    text-align:center;
+    background:#4B4B4B;
+    border:2px solid #1E1E1E;
+    color:#EFEFEF;
+    /*border-left-width: 1px;
+    border-right-width: 1px;*/
+    cursor: pointer;
+}
+.day .body{
+    overflow: hidden;
+}
+.day .body ul.events{
+    list-style:none;
+}
+.day .body ul.events li{
+    display:block;
+    padding:6px 6px 5px;
+    background:#6F6F6F;
+	color:#EFEFEF;
+    /*border-left:1px solid;
+    border-right:1px solid;
+    border-color:#BAAD8F;*/
+}
+.day .body ul.events li:nth-child(odd) {
+    background: #5F5F5F;
+}
+.day .body ul.events li p{
+    display:inline-block;
+}
+.day .body .events .time{
+    
+}
+.day .body .events .event{
+    
+}
+.day .closer{
+    /*background:rgba(216, 207, 186, 1);*/
+    background:#3C85B3;
+    padding:13px 0px;
+    text-align: center;
+    cursor: pointer;
+}
+.day .closer p{
+    -webkit-border-radius: 20px;
+    -moz-border-radius: 20px;
+    border-radius: 20px;
+    border:2px solid #000; color:#000; font-size:7pt;
+    display: inline-block;
+    padding:1px 4px;
+    font-weight: bold;
+}
+
+
+footer{
+    background: #052940;
+    color:#fff;
+    padding:70px 40px 120px;
+    margin-top:30px;
+}
+
+#dayEvent{
+    display:none;
+    position: absolute;
+    top:0px; left:0px;
+    height:250px; width:500px;
+    background: #444;
+}
+#dayEvent textarea{
+    width:430px;
+    height:250px;
+    border:none;
+    padding:10px;
+    border:2px solid #444;
+}
+
+#dayEvent .close{
+    display: inline-block;
+    padding:8px 11px; float: right;
+    background: #B83939; color:#fff;
+    text-align: center;
+    cursor: pointer;
+}
+#dayEvent .close:hover{
+    background: #C84959;
+}
