@@ -1,0 +1,32 @@
+<div class="calendar">    
+    <div class="week">
+       <div class="day evented " data-content="00:00:00;Regisztrációs hét kezdete;;*" data-date="2017-09-04">
+          <div class="header" style="background-color: rgb(75, 75, 75);">
+             <p>2017. szeptember 04.</p>
+          </div>
+          <div class="body">
+             <ul class="events">
+                <li title="">Regisztrációs hét kezdete</li>
+             </ul>
+          </div>
+          <div class="closer"></div>
+       </div>
+       <div class="day basic " data-date="2017-09-09">
+          <div class="header">
+             <p>2017. szeptember 09.</p>
+          </div>
+          <div class="body">
+             <ul class="events"></ul>
+          </div>
+       </div>
+    </div>
+</div>
+
+<div id="dayEvent">
+    <div class="close">X</div>
+    <form action="actions.php" method="post" name="de" id="de" enctype="multipart/form-data">
+        <input type="hidden" name="dayEventDay" id="dayEventDay" />
+        <input type="hidden" name="originalMysql" id="originalMysql" />
+        <textarea name="de_events" id="de_events" placeholder=""></textarea>
+    </form>
+</div>

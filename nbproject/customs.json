@@ -1,0 +1,9 @@
+{
+    "elements": {
+        "app-root": {},
+        "app-footer": {},
+        "app-header": {},
+        "app-calendar": {}
+    },
+    "attributes": {}
+}

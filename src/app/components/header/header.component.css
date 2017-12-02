@@ -1,0 +1,88 @@
+.siteheader section.days ul li{
+    display:inline-block;
+    width:14.285%;
+    padding:5px 0px;
+    text-align:center;
+    background:#0C486E;
+    border-right:2px solid #32739C; /* lighter */
+    border-left:2px solid #32739C;
+    border-bottom:4px solid #32739C;
+    color:#fff;
+}
+.siteheader{
+    background:#32739C;
+    height:40px;
+    position: fixed;
+    top:0px; left:0px; right:0px;
+    z-index:2000;
+    border-bottom:4px solid #0C486E; /* darker */
+}
+.siteheader section.menu ul{
+    width:42.5%;
+    min-width:340px;
+    margin:auto;
+}
+.siteheader section.menu ul li{
+    list-style: none;
+    display: inline-block;
+    border-left:4px solid #0C486E;
+    height:36px;
+
+    text-align: center;
+    cursor: pointer;
+    position: relative;
+}
+.siteheader section.menu ul li div.btn{
+    padding:0px 20px;
+    padding-top: 14px;
+}
+
+.siteheader section.menu ul li:hover{
+    background: #0C486E;
+}
+.siteheader section.menu ul li p{
+    color: #fff;
+    font-weight: bold;
+    font-size: 8pt;
+}
+.siteheader section.menu ul li.last{
+    border-right:4px solid #0C486E;
+}
+
+.siteheader section.days ul{
+    list-style:none;
+}
+
+.siteheader .abs{
+    position: absolute;
+    top:40px; left:0px;
+    cursor: default;
+    overflow: hidden;
+}
+.siteheader .abs span{
+    padding:10px;
+    display: none;
+}
+.siteheader input[type="text"]{
+    margin-bottom:1px;
+    padding:10px;
+    border:none;
+    width:300px;
+}
+.siteheader textarea{
+    margin-bottom:1px;
+    padding:10px;
+    border:none;
+    width:300px; height:75px;
+}
+
+.siteheader .todolist{
+    width: 0px; height: 0px; background: #333;
+    z-index:4000;
+}
+.siteheader .newevent{
+    z-index:4001;
+}
+.siteheader .sqlcommand{
+    z-index:4002;
+}

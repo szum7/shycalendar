@@ -1,0 +1,8 @@
+CREATE TABLE events (  
+    id      BIGINT NOT NULL AUTO_INCREMENT,
+    date    TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    intro   VARCHAR(500) NOT NULL,
+    content TEXT,
+    type    VARCHAR(255) DEFAULT "",
+    PRIMARY KEY(id)
+) ENGINE=InnoDB;
