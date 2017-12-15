@@ -1,4 +1,4 @@
-<div class="calendar">    
+<!--<div class="calendar">    
     <div class="week">
        <div class="day evented " data-content="00:00:00;Regisztrációs hét kezdete;;*" data-date="2017-09-04">
           <div class="header" style="background-color: rgb(75, 75, 75);">
@@ -29,4 +29,22 @@
         <input type="hidden" name="originalMysql" id="originalMysql" />
         <textarea name="de_events" id="de_events" placeholder=""></textarea>
     </form>
+</div>-->
+<div class="calendar">    
+    
+    <div class="week" *ngFor="let week of calendarData.data">
+        <div class="day{{(day.events.length > 0) ? ' evented' : ''}}{{(day.date == today) ? ' today' : ''}}" 
+             *ngFor="let day of week.days">
+            <div class="header" style="background-color: rgb(75, 75, 75);">
+                <p>{{day.date}}</p>
+            </div>
+            <div class="body">
+                <ul class="events" 
+                    *ngFor="let event of day.events">
+                    <li title="{{event.content}}">{{event.intro}}</li>
+                </ul>
+            </div>
+            <div class="closer"></div>
+        </div>        
+    </div>
 </div>

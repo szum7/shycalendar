@@ -17,8 +17,11 @@
 .day.basic{
     /*opacity: 0.8;*/
 }
-.day.evented{
-
+.day.today .header{
+    background:#a8374f !important;
+}
+.day.evented .closer{
+    display: block;
 }
 .day.today .header{
     background: #9E2E2E;
@@ -68,6 +71,7 @@
     padding:13px 0px;
     text-align: center;
     cursor: pointer;
+    display: none;
 }
 .day .closer p{
     -webkit-border-radius: 20px;

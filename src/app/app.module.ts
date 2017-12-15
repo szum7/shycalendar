@@ -1,12 +1,12 @@
 import {BrowserModule} from '@angular/platform-browser';
 import {NgModule} from '@angular/core';
-import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http';
 
+import {GlobalsService} from './services/globals.service';
 import {AppComponent} from './app.component';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { HeaderComponent } from './components/header/header.component';
-import { FooterComponent } from './components/footer/footer.component';
-
+import {CalendarComponent} from './components/calendar/calendar.component';
+import {HeaderComponent} from './components/header/header.component';
+import {FooterComponent} from './components/footer/footer.component';
 
 @NgModule({
     // components
@@ -19,10 +19,12 @@ import { FooterComponent } from './components/footer/footer.component';
     // modules
     imports: [
         BrowserModule,
-        HttpModule
+        HttpClientModule
     ],
     // services
-    providers: [],
+    providers: [
+        GlobalsService
+    ],
     // root component
     bootstrap: [AppComponent]
 })

@@ -66,6 +66,63 @@ class calender {
         }
         return $arr;
     }
+    
+    public function getCalendarData($connection_id){
+        
+        $ret = array(
+            "today" => date('Y-m-d'),
+            "data" => null
+        );
+        
+        $eventArray = $this->getEvents($connection_id);
+        $c = 0;
+        
+        $days = $this->createDateRangeArray(date($this->MASTER_DATE["from"]), $this->MASTER_DATE["to"]);
+        
+        $calData = array();
+        
+        for ($i = 0; $i < count($days); $i++) {
+            
+            // new week
+            if (date('w', strtotime($days[$i])) === '1' || count($calData) == 0) {
+                if(count($calData) - 1 >= 0){
+                    $calData[count($calData) - 1]["endDate"] = $days[$i - 1];
+                }
+                array_push($calData, array(
+                    "startDate" => $days[$i],
+                    "endDate" => "",
+                    "days" => array()
+                ));
+            }            
+            
+            // new day
+            array_push($calData[count($calData) - 1]["days"], array(
+                "date" => $days[$i],
+                "events" => array()
+            ));
+
+            // has event
+            if ($c < count($eventArray) && $days[$i] == substr($eventArray[$c]["date"], 0, 10)) {
+                
+                // iterate event
+                while ($c < count($eventArray) && $days[$i] == substr($eventArray[$c]["date"], 0, 10)) {
+                    array_push($calData[count($calData) - 1]["days"][count($calData[count($calData) - 1]["days"]) - 1]["events"], array(
+                        "date" => $eventArray[$c]["date"],
+                        "intro" => $eventArray[$c]["intro"],
+                        "content" => $eventArray[$c]["content"],
+                        "type" => $eventArray[$c]["type"]
+                    ));
+                    $c++;
+                }                
+            } 
+            
+        }
+        
+        $ret["data"] = $calData;
+        
+        // tmp
+        return $ret;
+    }
 
     public function buildCalendar($connection_id) {
 
@@ -114,8 +171,8 @@ class calender {
             echo '<div class="week">';
         }
 
-        // 10:00:00;Alma és körte;Hosszabb leírás*
-        // 15:30:00;Alma és körte;Hosszabb leírás*
+        // 10:00:00;Alma és körte;Hosszabb leírás;*
+        // 15:30:00;Alma és körte;Hosszabb leírás;*
         $data = "";
         $lis = "";
         while ($c < count($eventArray) && $day == substr($eventArray[$c]["date"], 0, 10)) {
