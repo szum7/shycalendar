@@ -30,18 +30,20 @@
         <textarea name="de_events" id="de_events" placeholder=""></textarea>
     </form>
 </div>-->
-<div class="calendar">    
-    
-    <div class="week" *ngFor="let week of calendarData.data">
-        <div class="day{{(day.events.length > 0) ? ' evented' : ''}}{{(day.date == today) ? ' today' : ''}}" 
-             *ngFor="let day of week.days">
-            <div class="header" style="background-color: rgb(75, 75, 75);">
+<div class="calendar">
+    <div class="week"
+         *ngFor="let week of calendarData.data">
+        <div class="day" 
+             *ngFor="let day of week.days"
+             [ngClass]="{'evented': (day.events.length > 0), 'today': (day.date == today)}"
+             (click)="openDay(day)">
+            <div class="header">
                 <p>{{day.date}}</p>
             </div>
             <div class="body">
-                <ul class="events" 
-                    *ngFor="let event of day.events">
-                    <li title="{{event.content}}">{{event.intro}}</li>
+                <ul class="events">
+                    <li title="{{event.content}}" 
+                        *ngFor="let event of day.events">{{event.intro}}</li>
                 </ul>
             </div>
             <div class="closer"></div>

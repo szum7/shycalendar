@@ -1,113 +1,139 @@
-.calendar{
-    margin-top:70px;
+.calendar {
+  margin-top: 70px;
 }
-.year{
-    margin-top:100px;
+
+.year {
+  margin-top: 100px;
 }
-.week{
+
+.week {
 }
-.week.first{
-    text-align:right;
+
+  .week.first {
+    text-align: right;
+  }
+
+.day {
+  display: inline-block;
+  vertical-align: top;
+  width: 14.282%;
 }
-.day{
-    display: inline-block;
-    vertical-align: top;
-    width:14.282%;
-}
-.day.basic{
+
+  .day.basic {
     /*opacity: 0.8;*/
-}
-.day.today .header{
-    background:#a8374f !important;
-}
-.day.evented .closer{
+  }
+
+  .day .header {
+    background-color: rgb(75, 75, 75);
+  }
+
+  .day.today .header {
+    background: #a8374f !important;
+  }
+
+  .day.evented .closer {
     display: block;
-}
-.day.today .header{
+  }
+
+  .day.today .header {
     background: #9E2E2E;
-    color:#fff;
-}
-.day .header{
+    color: #fff;
+  }
+
+  .day .header {
     position: relative;
-    padding:10px 0px;
-    text-align:center;
-    background:#4B4B4B;
-    border:2px solid #1E1E1E;
-    color:#EFEFEF;
+    padding: 10px 0px;
+    text-align: center;
+    background: #4B4B4B;
+    border: 2px solid #1E1E1E;
+    color: #EFEFEF;
     /*border-left-width: 1px;
     border-right-width: 1px;*/
     cursor: pointer;
-}
-.day .body{
+  }
+
+  .day .body {
     overflow: hidden;
-}
-.day .body ul.events{
-    list-style:none;
-}
-.day .body ul.events li{
-    display:block;
-    padding:6px 6px 5px;
-    background:#6F6F6F;
-    color:#EFEFEF;
-    /*border-left:1px solid;
-    border-right:1px solid;
-    border-color:#BAAD8F;*/
-}
-.day .body ul.events li:nth-child(odd) {
-    background: #5F5F5F;
-}
-.day .body ul.events li p{
-    display:inline-block;
-}
-.day .body .events .time{
+  }
 
-}
-.day .body .events .event{
+    .day .body ul.events {
+      list-style: none;
+    }
 
-}
-.day .closer{
+      .day .body ul.events li {
+        display: block;
+        padding: 6px 6px 5px;
+        background: #6F6F6F;
+        color: #EFEFEF;
+        /*border-left:1px solid;
+        border-right:1px solid;
+        border-color:#BAAD8F;*/
+      }
+
+        .day .body ul.events li:nth-child(odd) {
+          background: #5F5F5F;
+        }
+
+        .day .body ul.events li p {
+          display: inline-block;
+        }
+
+    .day .body .events .time {
+    }
+
+    .day .body .events .event {
+    }
+
+  .day .closer {
     /*background:rgba(216, 207, 186, 1);*/
-    background:#3C85B3;
-    padding:13px 0px;
+    background: #3C85B3;
+    padding: 13px 0px;
     text-align: center;
     cursor: pointer;
     display: none;
+  }
+
+    .day .closer p {
+      -webkit-border-radius: 20px;
+      -moz-border-radius: 20px;
+      border-radius: 20px;
+      border: 2px solid #000;
+      color: #000;
+      font-size: 7pt;
+      display: inline-block;
+      padding: 1px 4px;
+      font-weight: bold;
+    }
+
+
+#dayEvent {
+  display: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  height: 250px;
+  width: 500px;
+  background: #444;
 }
-.day .closer p{
-    -webkit-border-radius: 20px;
-    -moz-border-radius: 20px;
-    border-radius: 20px;
-    border:2px solid #000; color:#000; font-size:7pt;
+
+  #dayEvent textarea {
+    width: 430px;
+    height: 250px;
+    border: none;
+    padding: 10px;
+    border: 2px solid #444;
+  }
+
+  #dayEvent .close {
     display: inline-block;
-    padding:1px 4px;
-    font-weight: bold;
-}
-
-
-
-
-#dayEvent{
-    display:none;
-    position: absolute;
-    top:0px; left:0px;
-    height:250px; width:500px;
-    background: #444;
-}
-#dayEvent textarea{
-    width:430px;
-    height:250px;
-    border:none;
-    padding:10px;
-    border:2px solid #444;
-}
-
-#dayEvent .close{
-    display: inline-block;
-    padding:8px 11px; float: right;
-    background: #B83939; color:#fff;
+    padding: 8px 11px;
+    float: right;
+    background: #B83939;
+    color: #fff;
     text-align: center;
     cursor: pointer;
-}
-#dayEvent .close:hover{
-    background: #C84959;
-}
+  }
+
+    #dayEvent .close:hover {
+      background: #C84959;
+    }

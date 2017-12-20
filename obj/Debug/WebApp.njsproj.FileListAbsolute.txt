@@ -1,0 +1,2 @@
+C:\xampp\htdocs\ShyCalendar\obj\Debug\WebApp.njsproj.CoreCompileInputs.cache
+C:\xampp\htdocs\ShyCalendar\bin\Microsoft.NodejsTools.WebRole.dll
