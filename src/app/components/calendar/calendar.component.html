@@ -1,52 +1,57 @@
-<!--<div class="calendar">    
-    <div class="week">
-       <div class="day evented " data-content="00:00:00;Regisztrációs hét kezdete;;*" data-date="2017-09-04">
-          <div class="header" style="background-color: rgb(75, 75, 75);">
-             <p>2017. szeptember 04.</p>
-          </div>
-          <div class="body">
-             <ul class="events">
-                <li title="">Regisztrációs hét kezdete</li>
-             </ul>
-          </div>
-          <div class="closer"></div>
-       </div>
-       <div class="day basic " data-date="2017-09-09">
-          <div class="header">
-             <p>2017. szeptember 09.</p>
-          </div>
-          <div class="body">
-             <ul class="events"></ul>
-          </div>
-       </div>
-    </div>
-</div>
-
-<div id="dayEvent">
-    <div class="close">X</div>
-    <form action="actions.php" method="post" name="de" id="de" enctype="multipart/form-data">
-        <input type="hidden" name="dayEventDay" id="dayEventDay" />
-        <input type="hidden" name="originalMysql" id="originalMysql" />
-        <textarea name="de_events" id="de_events" placeholder=""></textarea>
-    </form>
-</div>-->
 <div class="calendar">
     <div class="week"
          *ngFor="let week of calendarData.data">
-        <div class="day" 
+        <div class="day"
              *ngFor="let day of week.days"
              [ngClass]="{'evented': (day.events.length > 0), 'today': (day.date == today)}"
-             (click)="openDay(day)">
+             (click)="OpenDay(day)">
             <div class="header">
                 <p>{{day.date}}</p>
             </div>
             <div class="body">
                 <ul class="events">
-                    <li title="{{event.content}}" 
+                    <li title="{{event.content}}"
                         *ngFor="let event of day.events">{{event.intro}}</li>
                 </ul>
             </div>
             <div class="closer"></div>
-        </div>        
+        </div>
     </div>
+
+    <div class="day-edit-window"
+         [ngClass]="{'hidden': (selectedDay.date == null)}">
+
+        <div class="header">
+            <div class="btn float-right"
+                 (click)="CloseDay()">X</div>
+            <p>{{selectedDay.date}}</p>
+        </div>
+
+        <div class="events">
+            <div class="event"
+                 *ngFor="let event of selectedDay.events">
+                <div class="ib date"><input type="text" [(ngModel)]="event.date" name="date" /></div>
+                <div class="ib description"><input type="text" [(ngModel)]="event.intro" name="intro" /></div>
+                <div class="ib title"><input type="text" [(ngModel)]="event.title" name="title" /></div>
+            </div>
+            <div class="event">
+                <div class="ib date"><input type="text" [(ngModel)]="newEvent.date" name="date" /></div>
+                <div class="ib description"><input type="text" [(ngModel)]="newEvent.intro" name="intro" /></div>
+                <div class="ib title"><input type="text" [(ngModel)]="newEvent.title" name="title" /></div>
+                <div class="btn"
+                     (click)="AddNewEvent()">OK</div>
+                <div class="btn"
+                     (click)="ClearNewEvent()">Clear</div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="btn"
+                 (click)="SaveDay()">Mentés</div>
+            <div class="btn"
+                 (click)="CancelDay()">Mégse</div>
+        </div>
+
+    </div>
+
 </div>

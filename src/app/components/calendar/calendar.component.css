@@ -1,5 +1,6 @@
 .calendar {
   margin-top: 70px;
+  position:relative;
 }
 
 .year {
@@ -125,7 +126,6 @@
   }
 
   #dayEvent .close {
-    display: inline-block;
     padding: 8px 11px;
     float: right;
     background: #B83939;
@@ -137,3 +137,26 @@
     #dayEvent .close:hover {
       background: #C84959;
     }
+
+.day-edit-window {
+  position: fixed;
+  right: 0;
+  left: 0;
+  top:200px;
+  margin-right: auto;
+  margin-left: auto;
+  min-height: 100px;
+  width: 90%;
+  background:#fff;
+}
+.day-edit-window .header{
+  background-color:#28a18f;
+  color:#fff;
+}
+  .day-edit-window .header p{
+    padding: 10px;
+    margin:0;
+  }
+.day-edit-window .events{
+  padding:10px;
+}
