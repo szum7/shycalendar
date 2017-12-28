@@ -63,7 +63,7 @@ export class CalendarComponent implements OnInit {
     public SaveDay(): void {
         this.PostSaveDay(this.selectedDay, function (response) {
             if (response) {
-
+                console.log(response);
             } else {
 
             }
@@ -98,6 +98,7 @@ export class CalendarComponent implements OnInit {
     }
 
     private PostSaveDay(day: Day, callback: (response: boolean) => void): void {
+        console.log(day);
         this.http.post(this.globals.BACKEND_URL + 'post/saveday.php', day).subscribe(function (response) {
             callback(response as boolean);
         }, function (error) {

@@ -8,6 +8,8 @@ class actions {
 
     public function SaveDay($connection_id, $day/*Day*/){ /*boolean*/
 
+        $day = Cast($day, "Day");
+
         $originalDay = $this->GetDay($connection_id, $day->date);
         $c = 0;
 
