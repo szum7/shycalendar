@@ -19,3 +19,8 @@ INSERT INTO events (date, intro, content, type) VALUES
 ("2014-10-17 00:00:00", "Analízis ZH1", "", ""),
 ("2014-11-24 00:00:00", "Analízis ZH2", "", ""),
 ("2014-12-08 00:00:00", "Analízis PótZH", "", "");
+
+INSERT INTO events (date, intro, content, type) VALUES 
+("2017-12-08 10:00:00", "Test adat1", "Leírás1", ""),
+("2017-12-08 10:00:00", "Test adat2", "Leírás2", ""),
+("2017-12-09 12:00:00", "Test adat3", "Leírás3", "");

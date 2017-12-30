@@ -21,6 +21,7 @@
   <PropertyGroup Condition="'$(Configuration)' == 'Release'" />
   <ItemGroup>
     <Content Include=".angular-cli.json" />
+    <Content Include="docs\safe.txt" />
     <Content Include="package.json" />
     <Content Include="src\assets\mysql\init.sql" />
     <Content Include="src\assets\mysql\insertExamples1.sql" />
@@ -85,6 +86,7 @@
     <Folder Include="e2e" />
     <Folder Include="nbproject" />
     <Folder Include="nbproject\private" />
+    <Folder Include="docs\" />
     <Folder Include="src" />
     <Folder Include="src\app" />
     <Folder Include="src\app\components" />

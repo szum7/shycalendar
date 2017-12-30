@@ -57,6 +57,7 @@ class calender {
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
                 array_push($arr, array(
+                    "id" => $row["id"],
                     "date" => $row["date"],
                     "intro" => $row["intro"],
                     "content" => $row["content"],
@@ -107,6 +108,7 @@ class calender {
                 // iterate event
                 while ($c < count($eventArray) && $days[$i] == substr($eventArray[$c]["date"], 0, 10)) {
                     array_push($calData[count($calData) - 1]["days"][count($calData[count($calData) - 1]["days"]) - 1]["events"], array(
+                        "id" => $eventArray[$c]["id"],
                         "date" => $eventArray[$c]["date"],
                         "intro" => $eventArray[$c]["intro"],
                         "content" => $eventArray[$c]["content"],

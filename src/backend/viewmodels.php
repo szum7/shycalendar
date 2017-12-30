@@ -1,6 +1,7 @@
 <?php
 
 class CalendarData {
+
     public $today/*string*/;
     public $data/*Array<Week>*/;
 
@@ -11,6 +12,7 @@ class CalendarData {
 }
 
 class Week {
+
     public $startDate/*string*/;
     public $endDate/*string*/;
     public $days/*Array<Day>*/;
@@ -23,6 +25,7 @@ class Week {
 }
 
 class Day {
+
     public $date/*string*/;
     public $events/*Array<Event>*/;
 
@@ -33,6 +36,7 @@ class Day {
 }
 
 class Event {
+
     public $id/*string*/;
     public $date/*string*/;
     public $intro/*string*/;

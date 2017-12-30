@@ -8,14 +8,20 @@ class actions {
 
     public function SaveDay($connection_id, $day/*Day*/){ /*boolean*/
 
-        $day = Cast($day, "Day");
+        // cast to object (should be: Day)
+        $day = (object)$day;
+        for ($i = 0; $i < count($day->events); $i++){
+            $day->events[$i] = (object)$day->events[$i];
+        }
 
+        // get the original day
         $originalDay = $this->GetDay($connection_id, $day->date);
         $c = 0;
 
         // sort $day by id
-        usort($day, "CompareById");
+        usort($day->events, "CompareById");
 
+        // sort the events to different arrays
         $newEvents = array();
         $deleteableEvents = array();
         $existingEvents = array();
@@ -30,6 +36,7 @@ class actions {
             }
         }
 
+        // sql actions
         $ia = $this->InsertEvents($connection_id, $newEvents);
         $ua = $this->UpdateEvents($connection_id, $existingEvents);
         $da = $this->DeleteEvents($connection_id, $deleteableEvents);
@@ -38,6 +45,10 @@ class actions {
     }
 
     private function UpdateEvents($connection_id, $events/*Array<Event>*/){ /*boolean*/
+        if (count($events) == 0){
+            return true;
+        }
+
         $query = "";
         for ($i = 0; $i < count($events); $i++){
             $query .= "
@@ -45,7 +56,7 @@ class actions {
                 WHERE id = " . $events[$i]->id . ";";
         }
 
-        if (!$connection_id->multi_query($sql)) {
+        if (!$connection_id->multi_query($query)) {
             echo "ERROR(UpdateEvents): (" . $connection_id->errno . ") " . $connection_id->error;
             return false;
         }
@@ -53,6 +64,10 @@ class actions {
     }
 
     private function InsertEvents($connection_id, $events/*Array<Event>*/){ /*boolean*/
+        if (count($events) == 0){
+            return true;
+        }
+
         $query = "
             INSERT INTO events (date, intro, content) VALUES ";
 
@@ -69,6 +84,10 @@ class actions {
     }
 
     private function DeleteEvents($connection_id, $events/*Array<Event>*/){ /*boolean*/
+        if (count($events) == 0){
+            return true;
+        }
+
         $query = "
             DELETE FROM events
             WHERE id IN (" . implode(",", $events) . ");";

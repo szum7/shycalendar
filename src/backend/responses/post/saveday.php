@@ -9,7 +9,7 @@ require_once $backEndRoot . 'viewmodels.php';
 require_once $backEndRoot . 'actions.php';
 require_once $backEndRoot . 'calendar.php';
 
-$data = file_get_contents('php://input');
+$data = json_decode(file_get_contents('php://input'));
 
 $a = new actions();
 $result = $a->SaveDay($connection_id, $data);
