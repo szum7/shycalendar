@@ -2,11 +2,13 @@
 
 class actions {
 
+    public /*APIResponse*/ $response;
+
     public function __construct() {
-        
+        $this->response = new APIResponse();
     }
 
-    public function SaveDay($connection_id, $day/*Day*/){ /*boolean*/
+    public /*boolean*/ function SaveDay($connection_id, /*Day*/ $day){ 
 
         // cast to object (should be: Day)
         $day = (object)$day;
@@ -22,18 +24,23 @@ class actions {
         usort($day->events, "CompareById");
 
         // sort the events to different arrays
-        $newEvents = array();
-        $deleteableEvents = array();
-        $existingEvents = array();
-        for ($i = 0; $i < count($day->events); $i++){
-            if ($day->events[$i]->id < 0){
-                array_push($newEvents, $day->events[$i]);
-            } else if ($c < count($originalDay->events) && $day->events[$i]->id == $originalDay->events[$c]->id){
-                array_push($existingEvents, $day->events[$i]);
-                $c++;
-            } else {
-                array_push($deleteableEvents, $day->events[$i]);
+        $newEvents = array/*<Event>*/();
+        $deleteableEvents = array/*<string>*/();
+        $existingEvents = array/*<Event>*/();
+        for ($i = 0; $i < count($day->events); $i++) {
+            if ($day->events[$i]->date != "" && $day->events[$i]->intro != "") {
+                if ($day->events[$i]->id < 0) {
+                    array_push($newEvents, $day->events[$i]);
+                } else if ($c < count($originalDay->events) && $day->events[$i]->id == $originalDay->events[$c]->id) {
+                    array_push($existingEvents, $day->events[$i]);
+                    $c++;
+                } 
             }
+        }
+
+        while ($c < count($originalDay->events)) {
+            array_push($deleteableEvents, $originalDay->events[$c]->id);
+            $c++;
         }
 
         // sql actions
@@ -41,11 +48,16 @@ class actions {
         $ua = $this->UpdateEvents($connection_id, $existingEvents);
         $da = $this->DeleteEvents($connection_id, $deleteableEvents);
 
-        return $ia && $ua && $da;
+        // returns
+        if ($ia && $ua && $da) {
+            $this->response->data = $this->GetDay($connection_id, $day->date);
+            return true;
+        }
+        return false;
     }
 
-    private function UpdateEvents($connection_id, $events/*Array<Event>*/){ /*boolean*/
-        if (count($events) == 0){
+    private /*boolean*/ function UpdateEvents($connection_id, /*Array<Event>*/ $events){ 
+        if (count($events) == 0) {
             return true;
         }
 
@@ -56,6 +68,10 @@ class actions {
                 WHERE id = " . $events[$i]->id . ";";
         }
 
+        // # DEBUG BEGIN
+        $this->response->AddToDebug($query);
+        // # DEBUG END
+
         if (!$connection_id->multi_query($query)) {
             echo "ERROR(UpdateEvents): (" . $connection_id->errno . ") " . $connection_id->error;
             return false;
@@ -63,28 +79,39 @@ class actions {
         return true;
     }
 
-    private function InsertEvents($connection_id, $events/*Array<Event>*/){ /*boolean*/
-        if (count($events) == 0){
+    private /*boolean*/ function InsertEvents($connection_id, /*Array<Event>*/ $events){ 
+        if (count($events) == 0) {
             return true;
         }
 
         $query = "
             INSERT INTO events (date, intro, content) VALUES ";
 
-        for ($i = 0; $i < count($events); $i++){
-            if($i != 0){
+        for ($i = 0; $i < count($events); $i++) {
+            if ($i != 0) {
                 $query .= ", ";
             }
-            $query .= "('" . $events[$i]->date . "', '" . $events[$i]->intro . "', '" . $events[$i]->content . "')";
+
+            if (!isset($events[$i]->content)) {
+                $events[$i]->content = "NULL";
+            } else {
+                $events[$i]->content = "'" . $events[$i]->content . "'";
+            }
+
+            $query .= "('" . $events[$i]->date . "', '" . $events[$i]->intro . "', " . $events[$i]->content . ")";
         }
 
         $result = mysqli_query($connection_id, $query) or die("ERROR(DeleteEvents): " . $query);
+        
+        // # DEBUG BEGIN
+        $this->response->AddToDebug($query);
+        // # DEBUG END
 
         return $result;
     }
 
-    private function DeleteEvents($connection_id, $events/*Array<Event>*/){ /*boolean*/
-        if (count($events) == 0){
+    private /*boolean*/ function DeleteEvents($connection_id, /*Array<string>*/ $events){ 
+        if (count($events) == 0) {
             return true;
         }
 
@@ -93,20 +120,30 @@ class actions {
             WHERE id IN (" . implode(",", $events) . ");";
 
         $result = mysqli_query($connection_id, $query) or die("ERROR(DeleteEvents): " . $query);
+        
+        // # DEBUG BEGIN
+        $this->response->AddToDebug($query);
+        // # DEBUG END
 
         return $result;
     }
 
-    private function GetDay($connection_id, $date/*string*/){ /*Day*/
-        $day = new Day();
-        $day->Set($date, array());
+    private /*Day*/ function GetDay($connection_id, /*string*/ $date){ 
         $query = "
             SELECT * 
             FROM events 
-            WHERE date >= '" . $date . " 00:00:00'
-            AND date <= '" . $date . " 23:59:59'
+            WHERE date >= '" . $date . " 00:00:00' 
+            AND date <= '" . $date . " 23:59:59' 
             ORDER BY id ASC;";
         $result = mysqli_query($connection_id, $query) or die("BAD QUERY - " . $query);
+        
+        // # DEBUG BEGIN
+        $this->response->AddToDebug($query);
+        // # DEBUG END
+
+        $day = new Day();
+        $day->Set($date, array());
+
         if (mysqli_num_rows($result) > 0) {
             while ($row = mysqli_fetch_assoc($result)) {
 

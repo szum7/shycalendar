@@ -14,4 +14,4 @@ $data = json_decode(file_get_contents('php://input'));
 $a = new actions();
 $result = $a->SaveDay($connection_id, $data);
 
-echo $result;
+echo json_encode($a->response);

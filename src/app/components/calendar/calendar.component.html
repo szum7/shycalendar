@@ -32,17 +32,12 @@
                  *ngFor="let event of selectedDay.events">
                 <div class="ib date"><input type="text" [(ngModel)]="event.date" name="date" /></div>
                 <div class="ib description"><input type="text" [(ngModel)]="event.intro" name="intro" /></div>
-                <div class="ib title"><input type="text" [(ngModel)]="event.title" name="title" /></div>
-            </div>
-            <div class="event">
-                <div class="ib date"><input type="text" [(ngModel)]="newEvent.date" name="date" /></div>
-                <div class="ib description"><input type="text" [(ngModel)]="newEvent.intro" name="intro" /></div>
-                <div class="ib title"><input type="text" [(ngModel)]="newEvent.title" name="title" /></div>
+                <div class="ib content"><input type="text" [(ngModel)]="event.content" name="content" /></div>
                 <div class="btn"
-                     (click)="AddNewEvent()">OK</div>
-                <div class="btn"
-                     (click)="ClearNewEvent()">Clear</div>
+                     (click)="DeleteEvent(event)">Delete</div>
             </div>
+            <div class="btn"
+                 (click)="AddNewEvent()">+</div>
         </div>
 
         <div class="footer">

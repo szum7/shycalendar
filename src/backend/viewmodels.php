@@ -1,5 +1,29 @@
 <?php
 
+/***
+ * General
+ */
+
+ class APIResponse{
+
+    public $debug/*string*/;
+    public $data/*any*/;
+
+    public function AddToDebug($str, $addBreak = true){
+        if ($addBreak) {
+            $this->debug .= $str . "\n";        
+        } else {
+            $this->debug .= $str;        
+        }
+    }
+
+ }
+
+
+/***
+ * Calendar
+ */
+
 class CalendarData {
 
     public $today/*string*/;

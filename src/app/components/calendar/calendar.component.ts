@@ -21,7 +21,6 @@ export class CalendarComponent implements OnInit {
     originalSelectedDayData: Day;
 
     today: string;
-    newEvent: Event;
 
     loading: boolean;
 
@@ -33,7 +32,6 @@ export class CalendarComponent implements OnInit {
         // locals
         this.calendarData = new CalendarData();
         this.selectedDay = new Day();
-        this.newEvent = new Event();
         this.loading = false;
     }
 
@@ -61,9 +59,11 @@ export class CalendarComponent implements OnInit {
     }
 
     public SaveDay(): void {
+        let _this = this;
         this.PostSaveDay(this.selectedDay, function (response) {
+            console.log(response.debug);
             if (response) {
-                console.log(response);
+                _this.selectedDay = response.data;
             } else {
 
             }
@@ -76,12 +76,14 @@ export class CalendarComponent implements OnInit {
     }
 
     public AddNewEvent(): void {
-        this.selectedDay.events.push(<Event>JSON.parse(JSON.stringify(this.newEvent)));
-        this.newEvent = new Event();
+        this.selectedDay.events.push(new Event("-1"));
     }
 
-    public ClearNewEvent(): void {
-        this.newEvent = new Event();
+    public DeleteEvent(event: Event): void {
+        let index = this.selectedDay.events.indexOf(event);
+        if (index > -1) {
+            this.selectedDay.events.splice(index, 1);
+        }
     }
 
 
@@ -97,10 +99,10 @@ export class CalendarComponent implements OnInit {
         });
     }
 
-    private PostSaveDay(day: Day, callback: (response: boolean) => void): void {
+    private PostSaveDay(day: Day, callback: (response: APIResponse) => void): void {
         console.log(day);
         this.http.post(this.globals.BACKEND_URL + 'post/saveday.php', day).subscribe(function (response) {
-            callback(response as boolean);
+            callback(response as APIResponse);
         }, function (error) {
             console.log(error);
         });
@@ -130,4 +132,13 @@ class Event {
     intro: string;
     content: string;
     type: string;
+
+    constructor(id: string) {
+        this.id = id;
+    }
+}
+
+class APIResponse {
+    debug: string;
+    data: any;
 }
