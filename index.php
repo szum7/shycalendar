@@ -49,7 +49,10 @@ require_once 'class/calendar.php';
 
         <?php
         $b = new calender();
-        $b->SetRelativeMasterDate(60 * 60 * 24 * 90, 60 * 60 * 24 * 60);
+        //$b->SetRelativeMasterDate(60 * 60 * 24 * 90, 60 * 60 * 24 * 60);
+		$plusDayFromToday = 180;
+		$minusDayFromToday = 1000;
+        $b->SetRelativeMasterDate(60 * 60 * 24 * $minusDayFromToday, 60 * 60 * 24 * $plusDayFromToday);
         $b->buildCalendar($connection_id);
         ?>
 
